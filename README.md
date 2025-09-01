@@ -1,4 +1,4 @@
-> Note: This is an experimental fork focused on adding support for Aitum Vertical output via NDI. It is mostly unmaintained and not intended for merging into the main DistroAV plugin. Expect limited support and potential breakage with future OBS/Aitum updates.
+> Note: This is an experimental fork focused on adding support for Aitum Vertical output via NDI. It is mostly unmaintained and not intended for merging into the main DistroAV plugin. Expect limited support and potential breakage with future OBS/DistroAV/Aitum updates.
 
 <div align="center">
 <h1>DistroAV (Formerly OBS-NDI)</h1>
