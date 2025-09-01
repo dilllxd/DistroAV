@@ -63,6 +63,8 @@ target_sources(
     src/premultiplied-alpha-filter.cpp
     src/preview-output.cpp
     src/preview-output.h
+    src/vertical-output.cpp
+    src/vertical-output.h
 )
 
 set(valid_uuid FALSE)
@@ -77,3 +79,11 @@ configure_file(
 )
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/lib/ndi)
 set_target_properties_plugin(${CMAKE_PROJECT_NAME} PROPERTIES OUTPUT_NAME ${_name})
+
+# Optional: detect OBS Canvas API (used by Aitum vertical canvas)
+include(CheckCXXSourceCompiles)
+set(_canvas_test "#include <obs-frontend-api.h>\nint main(){ obs_frontend_canvas_list cl = {}; (void)cl; return 0; }")
+check_cxx_source_compiles("${_canvas_test}" HAVE_OBS_CANVAS_API)
+if(HAVE_OBS_CANVAS_API)
+  target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE HAVE_OBS_CANVAS_API=1)
+endif()

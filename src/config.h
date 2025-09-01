@@ -76,6 +76,9 @@ public:
 	bool PreviewOutputEnabled;
 	QString PreviewOutputName;
 	QString PreviewOutputGroups;
+	bool VerticalOutputEnabled;
+	QString VerticalOutputName;
+	QString VerticalOutputGroups;
 	bool TallyProgramEnabled;
 	bool TallyPreviewEnabled;
 

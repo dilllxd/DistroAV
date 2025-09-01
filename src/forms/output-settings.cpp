@@ -20,6 +20,7 @@
 #include "plugin-main.h"
 #include "main-output.h"
 #include "preview-output.h"
+#include "vertical-output.h"
 #include "update.h"
 
 #include <QClipboard>
@@ -181,6 +182,10 @@ void OutputSettings::onFormAccepted()
 	config->PreviewOutputName = ui->previewOutputName->text();
 	config->PreviewOutputGroups = ui->previewOutputGroups->text();
 
+	config->VerticalOutputEnabled = ui->verticalOutputGroupBox->isChecked();
+	config->VerticalOutputName = ui->verticalOutputName->text();
+	config->VerticalOutputGroups = ui->verticalOutputGroups->text();
+
 	config->TallyProgramEnabled = ui->tallyProgramCheckBox->isChecked();
 	config->TallyPreviewEnabled = ui->tallyPreviewCheckBox->isChecked();
 
@@ -192,10 +197,12 @@ void OutputSettings::onFormAccepted()
 
 	// Output settings for debugging & diagnosis
 	obs_log(LOG_INFO,
-		"Output Settings set to MainEnabled='%d', MainName='%s', MainGroup='%s', PreviewEnabled='%d', PreviewName='%s', PreviewGroup='%s'",
-		config->OutputEnabled, config->OutputName.toUtf8().constData(),
-		config->PreviewOutputGroups.toUtf8().constData(), config->PreviewOutputEnabled,
-		config->PreviewOutputName.toUtf8().constData(), config->PreviewOutputGroups.toUtf8().constData());
+		"Output Settings set to MainEnabled='%d', MainName='%s', MainGroup='%s', PreviewEnabled='%d', PreviewName='%s', PreviewGroup='%s', VerticalEnabled='%d', VerticalName='%s', VerticalGroup='%s'",
+		config->OutputEnabled, config->OutputName.toUtf8().constData(), config->OutputGroups.toUtf8().constData(),
+		config->PreviewOutputEnabled, config->PreviewOutputName.toUtf8().constData(),
+		config->PreviewOutputGroups.toUtf8().constData(),
+		config->VerticalOutputEnabled, config->VerticalOutputName.toUtf8().constData(),
+		config->VerticalOutputGroups.toUtf8().constData());
 
 	config->Save();
 
@@ -221,6 +228,17 @@ void OutputSettings::onFormAccepted()
 	} else {
 		preview_output_deinit();
 	}
+
+	if (config->VerticalOutputEnabled && !config->VerticalOutputName.isEmpty()) {
+		if ((last_config.VerticalOutputEnabled != config->VerticalOutputEnabled) ||
+		    (last_config.VerticalOutputName != config->VerticalOutputName) ||
+		    (last_config.VerticalOutputGroups != config->VerticalOutputGroups)) {
+			obs_log(LOG_INFO, "Initializing Vertical output");
+			vertical_output_init();
+		}
+	} else {
+		vertical_output_deinit();
+	}
 }
 
 void OutputSettings::showEvent(QShowEvent *)
@@ -245,6 +263,10 @@ void OutputSettings::showEvent(QShowEvent *)
 	ui->previewOutputGroupBox->setChecked(config->PreviewOutputEnabled);
 	ui->previewOutputName->setText(config->PreviewOutputName);
 	ui->previewOutputGroups->setText(config->PreviewOutputGroups);
+
+	ui->verticalOutputGroupBox->setChecked(config->VerticalOutputEnabled);
+	ui->verticalOutputName->setText(config->VerticalOutputName);
+	ui->verticalOutputGroups->setText(config->VerticalOutputGroups);
 
 	ui->tallyProgramCheckBox->setChecked(config->TallyProgramEnabled);
 	ui->tallyPreviewCheckBox->setChecked(config->TallyPreviewEnabled);

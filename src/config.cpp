@@ -32,6 +32,9 @@
 #define PARAM_PREVIEW_OUTPUT_ENABLED "PreviewOutputEnabled"
 #define PARAM_PREVIEW_OUTPUT_NAME "PreviewOutputName"
 #define PARAM_PREVIEW_OUTPUT_GROUPS "PreviewOutputGroups"
+#define PARAM_VERTICAL_OUTPUT_ENABLED "VerticalOutputEnabled"
+#define PARAM_VERTICAL_OUTPUT_NAME "VerticalOutputName"
+#define PARAM_VERTICAL_OUTPUT_GROUPS "VerticalOutputGroups"
 #define PARAM_TALLY_PROGRAM_ENABLED "TallyProgramEnabled"
 #define PARAM_TALLY_PREVIEW_ENABLED "TallyPreviewEnabled"
 #define PARAM_SKIP_UPDATE_VERSION "SkipUpdateVersion"
@@ -58,6 +61,9 @@ std::map<std::string, enum ObsConfigType> ConfigTypeMap {
 	{PARAM_PREVIEW_OUTPUT_ENABLED, OBS_CONFIG_BOOL},
 	{PARAM_PREVIEW_OUTPUT_NAME, OBS_CONFIG_STRING},
 	{PARAM_PREVIEW_OUTPUT_GROUPS, OBS_CONFIG_STRING},
+	{PARAM_VERTICAL_OUTPUT_ENABLED, OBS_CONFIG_BOOL},
+	{PARAM_VERTICAL_OUTPUT_NAME, OBS_CONFIG_STRING},
+	{PARAM_VERTICAL_OUTPUT_GROUPS, OBS_CONFIG_STRING},
 	{PARAM_TALLY_PROGRAM_ENABLED, OBS_CONFIG_BOOL},
 	{PARAM_TALLY_PREVIEW_ENABLED, OBS_CONFIG_BOOL},
 	{PARAM_SKIP_UPDATE_VERSION, OBS_CONFIG_STRING}
@@ -190,6 +196,9 @@ Config::Config()
 	  PreviewOutputEnabled(false),
 	  PreviewOutputName("OBS Preview"),
 	  PreviewOutputGroups(""),
+	  VerticalOutputEnabled(false),
+	  VerticalOutputName("OBS Vertical"),
+	  VerticalOutputGroups(""),
 	  TallyProgramEnabled(true),
 	  TallyPreviewEnabled(true)
 {
@@ -213,6 +222,12 @@ void Config::SetDefaultsToUserStore()
 		config_set_default_string(obs_config, SECTION_NAME, PARAM_PREVIEW_OUTPUT_GROUPS,
 					  QT_TO_UTF8(PreviewOutputGroups));
 
+		config_set_default_bool(obs_config, SECTION_NAME, PARAM_VERTICAL_OUTPUT_ENABLED, VerticalOutputEnabled);
+		config_set_default_string(obs_config, SECTION_NAME, PARAM_VERTICAL_OUTPUT_NAME,
+					  QT_TO_UTF8(VerticalOutputName));
+		config_set_default_string(obs_config, SECTION_NAME, PARAM_VERTICAL_OUTPUT_GROUPS,
+					  QT_TO_UTF8(VerticalOutputGroups));
+
 		config_set_default_bool(obs_config, SECTION_NAME, PARAM_TALLY_PROGRAM_ENABLED, TallyProgramEnabled);
 		config_set_default_bool(obs_config, SECTION_NAME, PARAM_TALLY_PREVIEW_ENABLED, TallyPreviewEnabled);
 	}
@@ -231,6 +246,10 @@ void Config::GlobalToUserMigration()
 		MigrateSetting(app_config, user_config, SECTION_NAME, PARAM_PREVIEW_OUTPUT_ENABLED);
 		MigrateSetting(app_config, user_config, SECTION_NAME, PARAM_PREVIEW_OUTPUT_NAME);
 		MigrateSetting(app_config, user_config, SECTION_NAME, PARAM_PREVIEW_OUTPUT_GROUPS);
+
+		MigrateSetting(app_config, user_config, SECTION_NAME, PARAM_VERTICAL_OUTPUT_ENABLED);
+		MigrateSetting(app_config, user_config, SECTION_NAME, PARAM_VERTICAL_OUTPUT_NAME);
+		MigrateSetting(app_config, user_config, SECTION_NAME, PARAM_VERTICAL_OUTPUT_GROUPS);
 
 		MigrateSetting(app_config, user_config, SECTION_NAME, PARAM_TALLY_PROGRAM_ENABLED);
 		MigrateSetting(app_config, user_config, SECTION_NAME, PARAM_TALLY_PREVIEW_ENABLED);
@@ -254,6 +273,10 @@ void Config::Load()
 		PreviewOutputName = config_get_string(obs_config, SECTION_NAME, PARAM_PREVIEW_OUTPUT_NAME);
 		PreviewOutputGroups = config_get_string(obs_config, SECTION_NAME, PARAM_PREVIEW_OUTPUT_GROUPS);
 
+		VerticalOutputEnabled = config_get_bool(obs_config, SECTION_NAME, PARAM_VERTICAL_OUTPUT_ENABLED);
+		VerticalOutputName = config_get_string(obs_config, SECTION_NAME, PARAM_VERTICAL_OUTPUT_NAME);
+		VerticalOutputGroups = config_get_string(obs_config, SECTION_NAME, PARAM_VERTICAL_OUTPUT_GROUPS);
+
 		TallyProgramEnabled = config_get_bool(obs_config, SECTION_NAME, PARAM_TALLY_PROGRAM_ENABLED);
 		TallyPreviewEnabled = config_get_bool(obs_config, SECTION_NAME, PARAM_TALLY_PREVIEW_ENABLED);
 	}
@@ -271,6 +294,11 @@ void Config::Save()
 		config_set_string(obs_config, SECTION_NAME, PARAM_PREVIEW_OUTPUT_NAME, QT_TO_UTF8(PreviewOutputName));
 		config_set_string(obs_config, SECTION_NAME, PARAM_PREVIEW_OUTPUT_GROUPS,
 				  QT_TO_UTF8(PreviewOutputGroups));
+
+		config_set_bool(obs_config, SECTION_NAME, PARAM_VERTICAL_OUTPUT_ENABLED, VerticalOutputEnabled);
+		config_set_string(obs_config, SECTION_NAME, PARAM_VERTICAL_OUTPUT_NAME, QT_TO_UTF8(VerticalOutputName));
+		config_set_string(obs_config, SECTION_NAME, PARAM_VERTICAL_OUTPUT_GROUPS,
+				  QT_TO_UTF8(VerticalOutputGroups));
 
 		config_set_bool(obs_config, SECTION_NAME, PARAM_TALLY_PROGRAM_ENABLED, TallyProgramEnabled);
 		config_set_bool(obs_config, SECTION_NAME, PARAM_TALLY_PREVIEW_ENABLED, TallyPreviewEnabled);

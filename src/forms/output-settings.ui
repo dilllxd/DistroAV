@@ -140,7 +140,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QGroupBox" name="previewOutputGroupBox">
+   <widget class="QGroupBox" name="previewOutputGroupBox">
      <property name="styleSheet">
       <string notr="true">QWidget { padding-top: 1em; }</string>
      </property>
@@ -200,6 +200,73 @@
         </property>
         <property name="text">
          <string>previewOutputGroups</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="verticalOutputGroupBox">
+     <property name="styleSheet">
+      <string notr="true">QWidget { padding-top: 1em; }</string>
+     </property>
+     <property name="title">
+      <string>Aitum Vertical (NDI)</string>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+     <layout class="QGridLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="verticalOutputNameLabel">
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QWidget { padding: 0; }</string>
+        </property>
+        <property name="text">
+         <string>Name</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="verticalOutputName">
+        <property name="styleSheet">
+         <string notr="true">QWidget { padding: 0; }</string>
+        </property>
+        <property name="text">
+         <string>OBS Vertical</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="verticalOutputGroupsLabel">
+        <property name="minimumSize">
+         <size>
+          <width>200</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QWidget { padding: 0; }</string>
+        </property>
+        <property name="text">
+         <string>Groups</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="verticalOutputGroups">
+        <property name="styleSheet">
+         <string notr="true">QWidget { padding: 0; }</string>
+        </property>
+        <property name="text">
+         <string></string>
         </property>
        </widget>
       </item>
