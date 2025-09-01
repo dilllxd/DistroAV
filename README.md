@@ -1,3 +1,5 @@
+> Note: This is an experimental fork focused on adding support for Aitum Vertical output via NDI. It is mostly unmaintained and not intended for merging into the main DistroAV plugin. Expect limited support and potential breakage with future OBS/Aitum updates.
+
 <div align="center">
 <h1>DistroAV (Formerly OBS-NDI)</h1>
 <h3>Network Audio/Video in OBS-Studio using NDI technology</h3>  
@@ -13,8 +15,6 @@
 [![Open Collective backers and sponsors](https://img.shields.io/opencollective/all/distroav)](https://opencollective.com/distroav/donate)  
 [(Please consider making a donation)](https://opencollective.com/distroav)
 </div>
-
-> Note: This is an experimental fork focused on adding support for Aitum Vertical output via NDI. It is mostly unmaintained and not intended for merging into the main DistroAV plugin. Expect limited support and potential breakage with future OBS/Aitum updates.
 
 ## Features
 - **NDI Source** : Receive NDI video and audio in OBS
